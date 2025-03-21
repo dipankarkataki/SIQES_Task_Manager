@@ -9,7 +9,7 @@ class TaskManagement extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'task_managements';
+    protected $table = 'task_management';
     protected $fillable = [
         'category_id', 
         'title', 
@@ -24,4 +24,8 @@ class TaskManagement extends Model
         'assigned_by', 
         'remarks'
     ];
+
+    public function category(){
+        return $this->belongsTo(TaskCategory::class, 'category_id', 'id');
+    }
 }

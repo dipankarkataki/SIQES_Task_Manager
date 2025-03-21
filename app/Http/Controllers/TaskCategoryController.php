@@ -82,7 +82,7 @@ class TaskCategoryController extends Controller
                         'description' => $request->description ?? $category->description,
                         'updated_by' => auth()->user()->id,
                     ]);
-                    return $this->successResponse('Task category updated successfully', null, null, 200);
+                    return $this->successResponse('Task category updated successfully', $category, null, 200);
                 }else{
                     return $this->errorResponse('Task category not found', 404);
                 }
