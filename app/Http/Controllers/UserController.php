@@ -68,7 +68,7 @@ class UserController extends Controller
 
     public function getUsers(){
         try{
-            $users = User::all();
+            $users = User::withTrashed()->get();
             return $this->successResponse('Users found', $users, null, 200);
         }catch(\Exception $e){
             Log::error('Failed to get users: '.$e->getMessage());
