@@ -67,7 +67,7 @@ const EditTask = () => {
                 setPriority(res.data.data.priority);
                 setDueDate(res.data.data.due_date);
                 setStatus(res.data.data.status);
-                setAssignTo(res.data.data.assigned_to?.id);
+                setAssignTo(res.data.data.assigned_to ? res.data.data.assigned_to : "");
                 setRemarks(res.data.data.remarks);
             }
         } catch (err) {
