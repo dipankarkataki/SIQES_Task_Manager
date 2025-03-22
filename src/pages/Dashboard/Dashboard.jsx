@@ -11,8 +11,10 @@ const Dashboard = () => {
         tasks_in_progress: 0,
         completed_tasks: 0
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const getDashboardData = async () => {
+        setIsLoading(true);
         try {
             const res = await API.get("/task-management/task/get-all-task-with-count");
             if(res.data.success === true){
@@ -26,6 +28,8 @@ const Dashboard = () => {
             console.log(res.data);
         } catch (err) {
             console.log(err);
+        }finally{
+            setIsLoading(false);
         }
     }
 
@@ -38,10 +42,10 @@ const Dashboard = () => {
         <div className='dashboard-wrapper'>
             <h3 className='mx-3 my-3'>Dashboard</h3>
             <div className='card-wrapper'>
-                <CardComponent task_title='Total Tasks' task_count={taskCount.total_tasks} view_link='/all-tasks' />
-                <CardComponent task_title='Pending Tasks' task_count={taskCount.pending_tasks} view_link='/all-tasks' />
-                <CardComponent task_title='Task In Progress' task_count={taskCount.tasks_in_progress} view_link='/all-tasks' />
-                <CardComponent task_title='Completed Tasks' task_count={taskCount.completed_tasks} view_link='/all-tasks' />
+                <CardComponent task_title='Total Tasks' task_count={isLoading ? 'Loading..': taskCount.total_tasks} view_link='/all-tasks' />
+                <CardComponent task_title='Pending Tasks' task_count={isLoading ? 'Loading..': taskCount.pending_tasks} view_link='/all-tasks' />
+                <CardComponent task_title='Task In Progress' task_count={isLoading ? 'Loading..': taskCount.tasks_in_progress} view_link='/all-tasks' />
+                <CardComponent task_title='Completed Tasks' task_count={isLoading ? 'Loading..': taskCount.completed_tasks} view_link='/all-tasks' />
             </div>
         </div>
     );

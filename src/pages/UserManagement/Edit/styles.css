@@ -1,0 +1,10 @@
+.form-wrapper{
+    margin-left:20px;
+    width:400px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+::placeholder{
+    font-size: 12px;
+    color:#757575
+}
