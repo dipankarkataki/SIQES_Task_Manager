@@ -1,0 +1,34 @@
+.navbar {
+    background-color: #838996;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height:65px;
+}
+
+/* Change Dropdown Title Color */
+.custom-dropdown .nav-link {
+    color: #ffffff !important;
+    /* Change to any color */
+    font-weight: bold;
+}
+
+.custom-dropdown .nav-link:hover {
+    color: #ffa500 !important;
+    /* Hover color */
+}
+
+/* Profile Image Styling */
+.profile-image {
+    width: 40px;
+    /* Adjust size */
+    height: 40px;
+    border-radius: 50%;
+    /* Make it circular */
+    object-fit: cover;
+    cursor: pointer;
+    background-color: #ffffff;
+}
