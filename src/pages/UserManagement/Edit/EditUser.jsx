@@ -36,7 +36,8 @@ const EditUser = () => {
 
     const handleEditUser = async (e) => {
         e.preventDefault();
-        setSavingChanges(true)
+        setSavingChanges(true);
+        
         try{
             const res = await API.put(`user-management/update-user/${user_id}`, {
                 name, email, password, role
