@@ -8,7 +8,7 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isUserDeleted, setIsUserDeleted] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [deletingUser, setDeletingUser] = useState(null);
   const navigate = useNavigate();
 
   const getUsers = async () => {
@@ -33,7 +33,7 @@ const AllUsers = () => {
   }, [isUserDeleted]);
 
   const deleteUser = async (user_id) => {
-    setIsDeleting(true);
+    setDeletingUser(user_id);
     try {
       const res = await API.delete(`/user-management/delete-user/${user_id}`);
       if (res.data.success === true) {
@@ -45,7 +45,7 @@ const AllUsers = () => {
     } catch (err) {
       console.log(err)
     } finally {
-      setIsDeleting(false);
+      setDeletingUser(null);
     }
   }
 
@@ -89,7 +89,7 @@ const AllUsers = () => {
                         <td>{user.deleted_at ? <span className="badge bg-danger">Deleted</span> : <span className="badge bg-success">Active</span>}</td>
                         <td>
                           <button className="btn btn-sm btn-outline-primary mx-2" disabled={isDeleted} onClick={() => editUser(user.id)}>Edit</button>
-                          <button className="btn btn-sm btn-outline-danger mx-2" disabled={isDeleting || isDeleted} onClick={() => deleteUser(user.id)}> {isDeleting ? 'Please wait...' : 'Delete'}</button>
+                          <button className="btn btn-sm btn-outline-danger mx-2" disabled={deletingUser === user.id || isDeleted} onClick={() => deleteUser(user.id)}> {deletingUser === user.id ? 'Please wait...' : 'Delete'}</button>
                         </td>
                       </tr>
                     )

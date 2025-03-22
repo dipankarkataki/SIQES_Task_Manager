@@ -7,7 +7,7 @@ const AllCategories = () => {
     const [categories, setCategories] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isCategoryDeleted, setIsCategoryDeleted] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
+    const [deletingCategory, setDeletingCategory] = useState(null);
     const navigate = useNavigate();
 
     const getCategories = async () => {
@@ -37,7 +37,7 @@ const AllCategories = () => {
 
     }
     const deleteCategory = async (category_id) => {
-        setIsDeleting(true);
+        setDeletingCategory(category_id);
         try{
             const res = await API.delete(`/task-management/category/delete-category/${category_id}`);
             if (res.data.success === true) {
@@ -49,7 +49,7 @@ const AllCategories = () => {
         }catch(err){
             console.log(err)
         }finally{
-
+            setDeletingCategory(null);
         }
     }
     return (
@@ -92,7 +92,7 @@ const AllCategories = () => {
                                                 <td>{category.deleted_at ? <span className="badge bg-danger">Deleted</span> : <span className="badge bg-success">Active</span>}</td>
                                                 <td>
                                                     <button className="btn btn-sm btn-outline-primary mx-2" disabled={isDeleted} onClick={() => editCategory(category.id)}>Edit</button>
-                                                    <button className="btn btn-sm btn-outline-danger mx-2" disabled={isDeleting || isDeleted} onClick={() => deleteCategory(category.id)}> {isDeleting ? 'Please wait...' : 'Delete'}</button>
+                                                    <button className="btn btn-sm btn-outline-danger mx-2" disabled={deletingCategory === category.id || isDeleted} onClick={() => deleteCategory(category.id)}> {deletingCategory === category.id ? 'Please wait...' : 'Delete'}</button>
                                                 </td>
                                             </tr>
                                         )
