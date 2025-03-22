@@ -2,7 +2,7 @@
     margin-right:20px;
     margin-left:20px;
 }
-.wrap_text{
-    width: 300px;
+.wrap_task_text{
+    width: 180px;           /* Set a fixed width */
     word-wrap: break-word;
 }

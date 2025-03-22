@@ -22,6 +22,7 @@ const AppNavbar = () => {
   return (
     <Navbar expand="lg" className="navbar-wrapper p-2">
       <Container>
+        <h4>Task Manager | Admin Panel</h4>
         <Nav className="ms-auto">
           {/* Profile Dropdown */}
           <NavDropdown title={

@@ -87,9 +87,9 @@ const AllCategories = () => {
                                                 <td>{index + 1 }</td>
                                                 <td className='wrap_text'>{category.title}</td>
                                                 <td className='wrap_text'>{category.description ?? 'N/A' }</td>
-                                                <td>{category.created_by?.name || "N/A"}</td>
-                                                <td>{category.updated_by?.name || "N/A"}</td>
-                                                <td>{category.deleted_by?.name || "N/A"}</td>
+                                                <td>{category.created_by?.role || "N/A"}</td>
+                                                <td>{category.updated_by?.role || "N/A"}</td>
+                                                <td>{category.deleted_by?.role || "N/A"}</td>
                                                 <td>{category.deleted_at ? <span className="badge bg-danger">Deleted</span> : <span className="badge bg-success">Active</span>}</td>
                                                 <td>
                                                     <button className="btn btn-sm btn-outline-primary mx-2" disabled={isDeleted} onClick={() => editCategory(category.id)}>Edit</button>

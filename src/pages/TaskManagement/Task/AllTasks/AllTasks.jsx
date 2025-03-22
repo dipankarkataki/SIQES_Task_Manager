@@ -64,12 +64,14 @@ const AllTasks = () => {
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Category</th>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <th>Status</th>
                                 <th>Created By</th>
                                 <th>Updated By</th>
                                 <th>Deleted By</th>
-                                <th>Status</th>
+                                <th>Is Deleted</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -87,11 +89,17 @@ const AllTasks = () => {
                                         return (
                                             <tr key={index}>
                                                 <td>{index + 1}</td>
-                                                <td className="wrap_text">{task.title}</td>
-                                                <td className="wrap_text">{task.description ?? 'N/A'}</td>
-                                                <td>{task.created_by?.name || "N/A"}</td>
-                                                <td>{task.updated_by?.name || "N/A"}</td>
-                                                <td>{task.deleted_by?.name || "N/A"}</td>
+                                                <td className="wrap_task_text">{task.category?.title || 'N/A'}</td>
+                                                <td className="wrap_task_text">{task.title ? (task.title.length > 100 ? task.title.substring(0, 100) + "..." : task.title) : "N/A"}</td>
+                                                <td className="wrap_task_text">{task.description ? (task.description.length > 100 ? task.description.substring(0, 100) + "..." : task.description) : "N/A"}</td>
+                                                <td>
+                                                    {task.status == 'pending' && (<span className="badge bg-danger">Pending</span>)}
+                                                    {task.status == 'in_progress' && (<span className="badge bg-warning">In Progress</span>)}
+                                                    {task.status == 'completed' && (<span className="badge bg-success">Completed</span>)}
+                                                </td>
+                                                <td>{task.created_by?.role || "N/A"}</td>
+                                                <td>{task.updated_by?.role || "N/A"}</td>
+                                                <td>{task.deleted_by?.role || "N/A"}</td>
                                                 <td>{task.deleted_at ? <span className="badge bg-danger">Deleted</span> : <span className="badge bg-success">Active</span>}</td>
                                                 <td>
                                                     <button className="btn btn-sm btn-outline-primary mx-2" disabled={isDeleted} onClick={() => editCategory(task.id)}>Edit</button>
