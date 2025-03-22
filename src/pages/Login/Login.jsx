@@ -21,6 +21,8 @@ const Login = () => {
                 console.log(res.data.token);
                 localStorage.setItem("token", res.data.token);
                 navigate("/");
+            }else{
+                alert("Invalid Credentials")
             }
             
         } catch (err) {
@@ -32,7 +34,7 @@ const Login = () => {
     };
 
     return (
-        <div className='wrapper'>
+        <div className='wrapper-login'>
             <form className='form' onSubmit={handleLogin}>
                 <div className='brand-wrapper'>
                     <img src={brandLogo} alt='siqes-logo' className='brand-logo' />
