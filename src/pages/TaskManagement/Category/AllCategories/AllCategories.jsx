@@ -52,6 +52,7 @@ const AllCategories = () => {
             setDeletingCategory(null);
         }
     }
+    
     return (
         <div className='categories-wrapper'>
             <h3 className='mx-3 my-3'>All Categories</h3>
@@ -84,8 +85,8 @@ const AllCategories = () => {
                                         return (
                                             <tr key={index}>
                                                 <td>{index + 1 }</td>
-                                                <td>{category.title}</td>
-                                                <td>{category.description ?? 'N/A' }</td>
+                                                <td className='wrap_text'>{category.title}</td>
+                                                <td className='wrap_text'>{category.description ?? 'N/A' }</td>
                                                 <td>{category.created_by?.name || "N/A"}</td>
                                                 <td>{category.updated_by?.name || "N/A"}</td>
                                                 <td>{category.deleted_by?.name || "N/A"}</td>

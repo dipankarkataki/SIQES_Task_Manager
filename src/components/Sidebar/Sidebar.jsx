@@ -48,7 +48,7 @@ const Sidebar = () => {
                 <Accordion.Body>
                   <Nav className="flex-column">
                     <Nav.Link as={Link} to="/all-tasks" className="text-dark">All Tasks</Nav.Link>
-                    <Nav.Link href="#" className="text-dark">Create Task</Nav.Link>
+                    <Nav.Link as={Link} to="/create-task" className="text-dark">Create Task</Nav.Link>
                   </Nav>
                 </Accordion.Body>
               </Accordion.Item>
