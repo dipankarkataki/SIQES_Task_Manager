@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import "./styles.css";
 import { useNavigate } from "react-router-dom";
-import API from '../../../services/Api';
+import API from '../../../../services/Api';
 
 const AllCategories = () => {
     const [categories, setCategories] = useState([]);
@@ -49,10 +49,10 @@ const AllCategories = () => {
                                 <th>#</th>
                                 <th>Title</th>
                                 <th>Description</th>
-                                <th>Status</th>
                                 <th>Created By</th>
                                 <th>Updated By</th>
                                 <th>Deleted By</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

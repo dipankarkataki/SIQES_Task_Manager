@@ -8,7 +8,8 @@ import AllTasks from "./pages/TaskManagement/Task/AllTasks";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateUser from "./pages/UserManagement/Create/CreateUser";
 import EditUser from "./pages/UserManagement/Edit/EditUser";
-import AllCategories from "./pages/TaskManagement/Category/AllCategories";
+import AllCategories from "./pages/TaskManagement/Category/AllCategories/AllCategories";
+import CreateCategory from "./pages/TaskManagement/Category/Create/CreateCategory";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="create-user" element={<CreateUser/>} />
             <Route path="edit-user/:user_id" element={<EditUser/>} />
             <Route path="all-categories" element={<AllCategories />} />
+            <Route path="create-category" element={<CreateCategory />} />
           </Route>
         </Route>
       </Routes>
