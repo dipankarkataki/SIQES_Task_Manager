@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $id){
         $validate = Validator::make($request->all(), [
-            'email' => 'email|unique:users',
+            'email' => 'email|unique:users,email,' . $id,
         ]);
 
         if($validate->fails()){
@@ -107,7 +107,7 @@ class UserController extends Controller
                     User::where('id', $id)->update([
                         'name' => $request->name ?? $user->name,
                         'email' => $request->email ?? $user->email,
-                        'password' => Hash::make($request->password) ?? $user->password,
+                        'password' => $request->password != null ? Hash::make($request->password) : $user->password,
                         'role' => $request->role ?? $user->role,
                     ]);
                     return $this->successResponse('User updated successfully', null, null, 200);
