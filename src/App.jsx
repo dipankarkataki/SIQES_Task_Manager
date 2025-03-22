@@ -6,6 +6,7 @@ import PrivateRoutes from "./routes/PrivateRoutes";
 import AllUsers from "./pages/UserManagement/AllUsers";
 import AllTasks from "./pages/TaskManagement/AllTasks";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import CreateUser from "./pages/UserManagement/Create/CreateUser";
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
             <Route index element={<Dashboard />} />
             <Route path="all-users" element={<AllUsers />} />
             <Route path="all-tasks" element={<AllTasks />} />
+            <Route path="create-user" element={<CreateUser/>} />
           </Route>
         </Route>
       </Routes>

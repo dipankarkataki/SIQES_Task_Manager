@@ -36,7 +36,7 @@ const Dashboard = () => {
     return (
 
         <div className='dashboard-wrapper'>
-            <h2 className='mx-3 my-3'>Dashboard</h2>
+            <h3 className='mx-3 my-3'>Dashboard</h3>
             <div className='card-wrapper'>
                 <CardComponent task_title='Total Tasks' task_count={taskCount.total_tasks} view_link='/all-tasks' />
                 <CardComponent task_title='Pending Tasks' task_count={taskCount.pending_tasks} view_link='/all-tasks' />

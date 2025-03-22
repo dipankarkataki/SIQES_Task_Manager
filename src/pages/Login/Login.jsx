@@ -39,7 +39,7 @@ const Login = () => {
                     <h4 className='brand-name'>Task Management Admin Panel</h4>
                 </div>
                 <div className='form-group mb-3'>
-                    <label htmlFor='username' className='form-label'>Username</label>
+                    <label htmlFor='username' className='form-label'>Email</label>
                     <input type='email' id='email' name="email" value={email} className='form-control' placeholder='jhondoe@xyz.com' onChange={(e) => setEmail(e.target.value)} required />
                 </div>
                 <div className='form-group mb-3'>
