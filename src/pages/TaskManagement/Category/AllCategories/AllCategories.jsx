@@ -13,7 +13,7 @@ const AllCategories = () => {
     const getCategories = async () => {
         try{
             setIsLoading(true);
-            const res = await API.get("task-management/category/all-categories");
+            const res = await API.get("/task-management/category/all-categories");
             console.log(res.data);
             if(res.data.success === true){
                 setCategories(res.data.data);
@@ -30,13 +30,27 @@ const AllCategories = () => {
 
     useEffect(() => {
         getCategories();
-    }, []);
+    }, [isCategoryDeleted]);
 
     const editCategory = (category_id) => {
+        navigate(`/edit-category/${category_id}`);
 
     }
-    const deleteCategory = (category_id) => {
+    const deleteCategory = async (category_id) => {
+        setIsDeleting(true);
+        try{
+            const res = await API.delete(`/task-management/category/delete-category/${category_id}`);
+            if (res.data.success === true) {
+              alert('Category deleted successfully');
+              setIsCategoryDeleted(prev => !prev);
+            } else {
+              alert("Failed to delete category");
+            }
+        }catch(err){
+            console.log(err)
+        }finally{
 
+        }
     }
     return (
         <div className='categories-wrapper'>
@@ -71,7 +85,7 @@ const AllCategories = () => {
                                             <tr key={index}>
                                                 <td>{index + 1 }</td>
                                                 <td>{category.title}</td>
-                                                <td>{category.description}</td>
+                                                <td>{category.description ?? 'N/A' }</td>
                                                 <td>{category.created_by?.name || "N/A"}</td>
                                                 <td>{category.updated_by?.name || "N/A"}</td>
                                                 <td>{category.deleted_by?.name || "N/A"}</td>
