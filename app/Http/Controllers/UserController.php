@@ -23,7 +23,7 @@ class UserController extends Controller
             return $this->errorResponse('Validation error: '.$validate->errors()->first(), 400);
         }else{
             try{
-                $user = User::where('email', $request->email)->first();
+                $user = User::where(['email' => $request->email, 'role' => 'admin'])->first();
                 if(!$user || !Hash::check($request->password, $user->password)){
                     return $this->errorResponse('Invalid credentials', 401);
                 }else{
