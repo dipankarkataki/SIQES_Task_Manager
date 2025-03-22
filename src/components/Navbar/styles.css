@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    height:100px;
+    height:70px;
 }
 
 /* Change Dropdown Title Color */
@@ -14,7 +14,6 @@
     color: #ffffff !important;
     /* Change to any color */
     font-weight: bold;
-    margin-top:50px;
 }
 
 .custom-dropdown .nav-link:hover {

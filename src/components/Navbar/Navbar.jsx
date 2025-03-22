@@ -22,7 +22,6 @@ const AppNavbar = () => {
   return (
     <Navbar expand="lg" className="navbar-wrapper p-2">
       <Container>
-        <Navbar.Brand href="#">Dashboard</Navbar.Brand>
         <Nav className="ms-auto">
           {/* Profile Dropdown */}
           <NavDropdown title={

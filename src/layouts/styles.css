@@ -1,12 +1,12 @@
-.content-wrapper .main{
-    margin-left: 300px;
-    transition: 0.5s;
-    padding: 20px;
-    padding-top: 20;
-    min-height: 100vh;
-    background-color: #f1f2f6;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
+.wrapper{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aliceblue;
+}
+
+.content-wrapper{
+    height:100%;
+    width:100%;
 }
