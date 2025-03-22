@@ -65,7 +65,7 @@ class TaskCategoryController extends Controller
 
     public function updateCategory(Request $request, $id){
         $validate = Validator::make($request->all(), [
-            'title' => 'string|unique:task_categories',
+            'title' => 'string|unique:task_categories,title,' . $id,
             'description' => 'nullable|string'
         ], [
             'title.unique' => 'Task category with same title already exists'
@@ -79,7 +79,7 @@ class TaskCategoryController extends Controller
                 if($category){
                     $update = $category->update([
                         'title' => $request->title ?? $category->title,
-                        'description' => $request->description ?? $category->description,
+                        'description' => $request->description,
                         'updated_by' => auth()->user()->id,
                     ]);
                     return $this->successResponse('Task category updated successfully', $category, null, 200);
