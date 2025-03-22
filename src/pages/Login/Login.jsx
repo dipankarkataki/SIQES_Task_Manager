@@ -16,13 +16,13 @@ const Login = () => {
         setIsLoading(true);
         try {
             const res = await API.post("/login", { email, password });
-            console.log(res.data.success)
+            console.log(res.data)
             if(res.data.success === true){
                 console.log(res.data.token);
                 localStorage.setItem("token", res.data.token);
                 navigate("/");
             }else{
-                alert("Invalid Credentials")
+                alert("Invalid credentials");
             }
             
         } catch (err) {

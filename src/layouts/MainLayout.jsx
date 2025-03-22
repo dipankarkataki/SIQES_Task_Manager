@@ -6,7 +6,7 @@ import "./styles.css";
 
 const MainLayout = () => {  
   return (
-    <div className="wrapper">
+    <div className="wrapper-layout">
       <Sidebar />
       <div className="content-wrapper"> 
         <AppNavbar />
@@ -14,15 +14,6 @@ const MainLayout = () => {
           <Outlet />
         </div>
       </div>
-        {/* <div className="sidebar-wrapper">
-            <Sidebar />
-        </div>
-        <div className="content-wrapper">
-            <AppNavbar />
-            <div className="main">
-                <Outlet />
-            </div>
-        </div> */}
     </div>
   )
 }
