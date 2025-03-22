@@ -3,6 +3,12 @@
     margin-left:20px;
 }
 .wrap_task_text{
-    width: 180px;           /* Set a fixed width */
+    max-width: 150px;           /* Set a fixed width */
     word-wrap: break-word;
+}
+thead tr th{
+    font-size: 16px;
+}
+tbody tr td{
+    font-size: 14px;
 }

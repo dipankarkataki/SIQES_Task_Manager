@@ -12,6 +12,7 @@ import AllCategories from "./pages/TaskManagement/Category/AllCategories/AllCate
 import CreateCategory from "./pages/TaskManagement/Category/Create/CreateCategory";
 import EditCategory from "./pages/TaskManagement/Category/Edit/EditCategory";
 import CreateTask from "./pages/TaskManagement/Task/Create/CreateTask";
+import EditTask from "./pages/TaskManagement/Task/Edit/EditTask";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
             <Route path="edit-category/:category_id" element={<EditCategory />} />
             <Route path="all-tasks" element={<AllTasks />} />
             <Route path="create-task" element={<CreateTask />} />
+            <Route path="edit-task/:task_id" element={<EditTask />} />
           </Route>
         </Route>
       </Routes>
