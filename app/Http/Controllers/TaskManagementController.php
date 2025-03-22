@@ -33,6 +33,8 @@ class TaskManagementController extends Controller
                     'description' => $request->description,
                     'priority' => $request->priority,
                     'due_date' => $request->due_date,
+                    'assigned_to' => $request->assigned_to,
+                    'assigned_by' => $request->assigned_to != null ? auth()->user()->id : null,
                     'remarks' => $request->remarks,
                     'created_by' => auth()->user()->id
                 ]);
@@ -48,7 +50,7 @@ class TaskManagementController extends Controller
 
     public function getAllTasks(){
         try{
-            $tasks = TaskManagement::withTrashed()->with('category', 'created_by', 'updated_by', 'deleted_by')->get();
+            $tasks = TaskManagement::withTrashed()->with('category', 'assigned_to', 'created_by', 'updated_by', 'deleted_by')->OrderBy('created_at', 'DESC')->get();
             return $this->successResponse('Tasks fetched successfully', $tasks, null, 200);
         }catch(\Exception $e){
             Log::error('Failed to fetch tasks: ' . $e->getMessage());
@@ -77,10 +79,10 @@ class TaskManagementController extends Controller
             'description' => 'string',
             'priority' => 'in:low,medium,high',
             'status' => 'in:pending,in_progress,completed',
-            'assigned_to' => 'exists:users,id',
-            'assigned_by' => 'exists:users,id',
+            'assigned_to' => 'nullable|exists:users,id',
+            'assigned_by' => 'nullable|exists:users,id',
             'due_date' => 'date',
-            'remarks' => 'string'
+            'remarks' => 'nullable|string'
         ]);
 
         if($validate->fails()){

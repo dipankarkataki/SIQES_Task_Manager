@@ -41,7 +41,7 @@ class TaskCategoryController extends Controller
 
     public function getCategories(){
         try{
-            $categories = TaskCategory::withTrashed()->with('created_by', 'updated_by', 'deleted_by')->get();
+            $categories = TaskCategory::withTrashed()->with('created_by', 'updated_by', 'deleted_by')->orderBy('created_at', 'DESC')->get();
             return $this->successResponse('Task categories retrieved successfully', $categories, null, 200);
         }catch(\Exception $e){
             Log::error('Failed to retrieve task categories: '.$e->getMessage());
