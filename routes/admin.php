@@ -37,6 +37,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
             Route::get('/task-by-id/{id}', [TaskManagementController::class, 'getTaskById']);
             Route::put('/update-task/{id}', [TaskManagementController::class, 'updateTask']);
             Route::delete('/delete-task/{id}', [TaskManagementController::class, 'deleteTask']);
+            Route::get('get-all-task-with-count', [TaskManagementController::class, 'getAllTaskWithCount']);
         });
     });
 });
