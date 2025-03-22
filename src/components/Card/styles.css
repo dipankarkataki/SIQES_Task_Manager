@@ -1,0 +1,16 @@
+.card-container{
+    margin-right:10px;
+    width: 18rem;
+    margin-bottom: 20px;
+}
+.card-image{
+    height: 180px;
+    object-fit: cover;
+}
+.task-count{
+    font-size: 30px;
+    font-weight: bold;
+}
+.card_link{
+    text-decoration: none;
+}
