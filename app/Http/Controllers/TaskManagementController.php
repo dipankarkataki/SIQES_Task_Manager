@@ -48,7 +48,7 @@ class TaskManagementController extends Controller
 
     public function getAllTasks(){
         try{
-            $tasks = TaskManagement::with('category')->get();
+            $tasks = TaskManagement::withTrashed()->with('category', 'created_by', 'updated_by', 'deleted_by')->get();
             return $this->successResponse('Tasks fetched successfully', $tasks, null, 200);
         }catch(\Exception $e){
             Log::error('Failed to fetch tasks: ' . $e->getMessage());
