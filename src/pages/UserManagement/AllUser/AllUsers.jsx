@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../../services/Api";
 import "./styles.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const AllUsers = () => {
 
@@ -15,9 +15,11 @@ const AllUsers = () => {
     setIsLoading(true);
     try {
       const res = await API.get("/user-management/users");
+      console.log(res.data.data);
       if (res.data.success === true) {
         setUsers(res.data.data);
-        console.log(res.data.data);
+      }else{
+        alert("Failed to load data");
       }
     } catch (err) {
       console.log(err);
@@ -59,6 +61,7 @@ const AllUsers = () => {
           <table className="table table-bordered">
             <thead>
               <tr>
+                <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Role</th>
@@ -71,7 +74,7 @@ const AllUsers = () => {
                 isLoading ?
                   (
                     <tr>
-                      <td colSpan="4" className="text-center">Please wait. Loading data...</td>
+                      <td colSpan="6" className="text-center">Please wait. Loading data...</td>
                     </tr>
 
                   ) :
@@ -79,6 +82,7 @@ const AllUsers = () => {
                     const isDeleted = user.deleted_at;
                     return (
                       <tr key={index}>
+                        <td>{index + 1}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>{user.role}</td>

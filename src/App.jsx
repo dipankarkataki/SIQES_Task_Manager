@@ -4,10 +4,11 @@ import Login from "./pages/Login/Login";
 import MainLayout from "./layouts/MainLayout";
 import PrivateRoutes from "./routes/PrivateRoutes";
 import AllUsers from "./pages/UserManagement/AllUser/AllUsers";
-import AllTasks from "./pages/TaskManagement/AllTasks";
+import AllTasks from "./pages/TaskManagement/Task/AllTasks";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import CreateUser from "./pages/UserManagement/Create/CreateUser";
 import EditUser from "./pages/UserManagement/Edit/EditUser";
+import AllCategories from "./pages/TaskManagement/Category/AllCategories";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="all-tasks" element={<AllTasks />} />
             <Route path="create-user" element={<CreateUser/>} />
             <Route path="edit-user/:user_id" element={<EditUser/>} />
+            <Route path="all-categories" element={<AllCategories />} />
           </Route>
         </Route>
       </Routes>

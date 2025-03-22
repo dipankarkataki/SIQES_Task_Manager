@@ -36,7 +36,7 @@ const Sidebar = () => {
                 <Accordion.Header>Category</Accordion.Header>
                 <Accordion.Body>
                   <Nav className="flex-column">
-                    <Nav.Link href="#" className="text-dark">All Categories</Nav.Link>
+                    <Nav.Link as={Link} to="/all-categories" className="text-dark">All Categories</Nav.Link>
                     <Nav.Link href="#" className="text-dark">Create Category</Nav.Link>
                   </Nav>
                 </Accordion.Body>
