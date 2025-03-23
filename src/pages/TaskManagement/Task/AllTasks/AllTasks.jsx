@@ -6,9 +6,11 @@ import API from "../../../../services/Api";
 const AllTasks = () => {
 
     const [tasks, setTasks] = useState([]);
+    const [filteredTasks, setFilteredTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isTaskDeleted, setIsTaskDeleted] = useState(false);
     const [deletingTask, setDeletingTask] = useState(null);
+    const [filterStatus, setFilterStatus] = useState("")
     const navigate = useNavigate();
 
     const getTasks = async () => {
@@ -18,6 +20,7 @@ const AllTasks = () => {
             console.log(res.data);
             if (res.data.success === true) {
                 setTasks(res.data.data);
+                setFilteredTasks(res.data.data);
             } else {
                 alert("Failed to load data");
             }
@@ -33,6 +36,19 @@ const AllTasks = () => {
         getTasks();
     }, [isTaskDeleted]);
 
+    // Filter the tasks when filterStatus changes
+    useEffect(() => {
+        if (filterStatus === "" || filterStatus === "all") {
+            setFilteredTasks(tasks);
+        } else {
+            setFilteredTasks(tasks.filter(task => task.status === filterStatus));
+        }
+    }, [filterStatus, tasks]);
+
+    const handleFilterChange = (event) => {
+        setFilterStatus(event.target.value);
+    };
+
     const editTask = (task_id) => {
         navigate(`/edit-task/${task_id}`);
 
@@ -40,24 +56,33 @@ const AllTasks = () => {
 
     const deleteTask = async (task_id) => {
         setDeletingTask(task_id);
-        try{
+        try {
             const res = await API.delete(`/task-management/task/delete-task/${task_id}`);
             if (res.data.success === true) {
-              alert('Task deleted successfully');
-              setIsTaskDeleted(prev => !prev);
+                alert('Task deleted successfully');
+                setIsTaskDeleted(prev => !prev);
             } else {
-              alert("Failed to delete task");
+                alert("Failed to delete task");
             }
-        }catch(err){
+        } catch (err) {
             console.log(err)
-        }finally{
+        } finally {
             setDeletingTask(null);
         }
     }
 
     return (
         <div className="all-task-wrapper">
-            <h2 className="mx-3 my-3">All Tasks</h2>
+            <div className="d-flex justify-content-between">
+                <h3 className="mx-3 my-3">All Tasks</h3>
+                <select name="filter-task" id="filter-task" className="form-select w-25 mx-3 my-3" value={filterStatus} onChange={handleFilterChange}>
+                    <option value="">Filter Task By Status</option>
+                    <option value="all">All</option>
+                    <option value="pending">Pending</option>
+                    <option value="in_progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
             <div className="all-task-table-wrapper">
                 <div className="table-responsive">
                     <table className="table table-bordered">
@@ -84,8 +109,12 @@ const AllTasks = () => {
                                         <td colSpan="11" className="text-center">Please wait. Loading data...</td>
                                     </tr>
 
+                                ) :  filteredTasks.length === 0 ? (
+                                    <tr>
+                                        <td colSpan="11" className="text-center">No tasks found.</td>
+                                    </tr>
                                 ) :
-                                tasks.map((task, index) => {
+                                filteredTasks.map((task, index) => {
                                     const isDeleted = task.deleted_at;
                                     return (
                                         <tr key={index}>

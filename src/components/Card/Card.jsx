@@ -14,7 +14,7 @@ const  CardComponent = ({task_title, task_count, view_link}) => {
         <Card.Text className='task-count'>
           {task_count}
         </Card.Text>
-        <Link to="/" className='card_link'>View Task</Link>
+        <Link to={view_link} className='card_link'>View Task</Link>
       </Card.Body>
     </Card>
   );
