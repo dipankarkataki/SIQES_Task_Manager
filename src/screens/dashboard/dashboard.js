@@ -4,17 +4,17 @@ import { styles } from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TopTabsNavigator from '../../components/TopTabsNavigator';
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   const profile_image = require('../../assets/images/profile.jpg');
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header_container}>
-        <Text style={styles.header_text}>Dashboard</Text>
-        <TouchableOpacity activeOpacity={0.8} style={styles.profile_image_container}>
-          <Image source={profile_image} style={styles.profile_image} />
-        </TouchableOpacity>
-      </View>
-      <TopTabsNavigator />
+          <Text style={styles.header_text}>Dashboard</Text>
+          <TouchableOpacity activeOpacity={0.8} style={styles.profile_image_container} onPress={() => navigation.navigate('Profile')}>
+            <Image source={profile_image} style={styles.profile_image} />
+          </TouchableOpacity>
+        </View>
+        <TopTabsNavigator />
     </SafeAreaView>
   )
 }

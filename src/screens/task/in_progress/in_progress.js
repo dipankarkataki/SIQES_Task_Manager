@@ -1,5 +1,5 @@
-import { View, Text} from 'react-native';
-import React, {useState } from 'react';
+import { View, Text, ImageBackground } from 'react-native';
+import React, { useState } from 'react';
 import { styles } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
@@ -14,6 +14,7 @@ const InProgress = () => {
 
   const [shimmerLoading, setShimmerLoading] = useState(false);
   const [inProgressTasks, setInProgressTasks] = useState([]);
+  const backgroundImage = require('../../../assets/images/background.png');
 
   const getInProgressTasks = async () => {
     setShimmerLoading(true);
@@ -40,7 +41,7 @@ const InProgress = () => {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       {
         shimmerLoading ? (
           <View style={styles.shimmerContainer}>
@@ -53,28 +54,30 @@ const InProgress = () => {
             <ShimmerPlaceholder style={styles.shimmerViewPlaceholder} />
           </View>
         ) : (
-          <ScrollView style={styles.tasks_scroll_container}>
-            {
-              inProgressTasks.length > 0 ? (
-                inProgressTasks.map((task, index) => (
-                  <TaskCardComponent
-                    key={index}
-                    title={task.title}
-                    description={task.description}
-                    status={task.status}
-                    priority={task.priority}
-                    due_date={task.due_date}
-                    view_link={'/in-progress/' + task.id}
-                  />
-                ))
-              ) : (
-                <View style={styles.no_tasks_container}>
-                  <Text style={styles.no_tasks}>No In Progress Tasks</Text>
-                </View>
+          <ImageBackground source={backgroundImage} style={styles.image_background}>
+            <ScrollView style={styles.tasks_scroll_container}>
+              {
+                inProgressTasks.length > 0 ? (
+                  inProgressTasks.map((task) => (
+                    <TaskCardComponent
+                      key={task.id}
+                      title={task.title}
+                      description={task.description}
+                      status={task.status}
+                      priority={task.priority}
+                      due_date={task.due_date}
+                      view_link={'/in-progress/' + task.id}
+                    />
+                  ))
+                ) : (
+                  <View style={styles.no_tasks_container}>
+                    <Text style={styles.no_tasks}>No In Progress Tasks</Text>
+                  </View>
 
-              )
-            }
-          </ScrollView>
+                )
+              }
+            </ScrollView>
+          </ImageBackground>
         )
       }
     </View>

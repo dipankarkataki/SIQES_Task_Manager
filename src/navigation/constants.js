@@ -4,5 +4,6 @@ export default {
     LOGIN: 'Login',
     PENDING_TASKS: 'PendingTasks',
     IN_PROGRESS_TASKS: 'InProgressTasks',
-    COMPLETED_TASKS: 'CompletedTasks'
+    COMPLETED_TASKS: 'CompletedTasks',
+    PROFILE: 'Profile'
 }

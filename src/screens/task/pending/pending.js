@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 import React, { useState } from 'react';
 import { styles } from './styles';
 import LinearGradient from 'react-native-linear-gradient';
@@ -14,6 +14,7 @@ const Pending = () => {
 
   const [shimmerLoading, setShimmerLoading] = useState(false);
   const [pendingTasks, setPendingTasks] = useState([]);
+  const backgroundImage = require('../../../assets/images/background.png');
 
   const getPendingTasks = async () => {
     setShimmerLoading(true);
@@ -40,7 +41,7 @@ const Pending = () => {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       {
         shimmerLoading ? (
           <View style={styles.shimmerContainer}>
@@ -53,28 +54,30 @@ const Pending = () => {
             <ShimmerPlaceholder style={styles.shimmerViewPlaceholder} />
           </View>
         ) : (
-          <ScrollView style={styles.tasks_scroll_container}>
-            {
-              pendingTasks.length > 0 ? (
-                pendingTasks.map((task, index) => (
-                  <TaskCardComponent
-                    key={index}
-                    title={task.title}
-                    description={task.description}
-                    status={task.status}
-                    priority={task.priority}
-                    due_date={task.due_date}
-                    view_link={'/pending/' + task.id}
-                  />
-                ))
-              ) : (
-                <View style={styles.no_tasks_container}>
-                  <Text style={styles.no_tasks}>No Pending Tasks</Text>
-                </View>
+          <ImageBackground source={backgroundImage} style={styles.image_background}>
+            <ScrollView style={styles.tasks_scroll_container}>
+              {
+                pendingTasks.length > 0 ? (
+                  pendingTasks.map((task) => (
+                    <TaskCardComponent
+                      key={task.id}
+                      title={task.title}
+                      description={task.description}
+                      status={task.status}
+                      priority={task.priority}
+                      due_date={task.due_date}
+                      view_link={'/pending/' + task.id}
+                    />
+                  ))
+                ) : (
+                  <View style={styles.no_tasks_container}>
+                    <Text style={styles.no_tasks}>No Pending Tasks</Text>
+                  </View>
 
-              )
-            }
-          </ScrollView>
+                )
+              }
+            </ScrollView>
+          </ImageBackground>
         )
       }
     </View>

@@ -1,8 +1,10 @@
-import ApiManager from "../../../services/ApiManager";
+import ApiManager from "../../services/ApiManager";
 
-export default CompletedTaskApi = async () => {
+export default LogoutApi = async () => {
     try {
-        const result = await ApiManager('/dashboard/completed-tasks');
+        const result = await ApiManager('/logout', {
+            method: "POST",
+        });
         // console.log('API Response: ', result); // Log the response
         return result;
     } catch (error) {

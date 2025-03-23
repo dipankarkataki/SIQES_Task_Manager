@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale } from "react-native-size-matters";
 export const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    image_background: {
+        flex: 1,
+    },
     text: {
         fontSize: 20,
         fontWeight: 'bold',

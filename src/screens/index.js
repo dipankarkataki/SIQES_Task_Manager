@@ -13,3 +13,4 @@ export {default as Dashboard} from '../screens/dashboard/dashboard';
 export {default as PendingTasks} from '../screens/task/pending/pending';
 export {default as InProgressTasks} from '../screens/task/in_progress/in_progress';
 export {default as CompletedTasks} from '../screens/task/completed/completed';
+export {default as Profile} from '../screens/profile/profile';
