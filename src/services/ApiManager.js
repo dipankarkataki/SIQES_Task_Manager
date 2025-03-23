@@ -5,7 +5,6 @@ import UrlProvider from "./UrlProvider";
 const ApiManager = axios.create({
     'baseURL': UrlProvider.local_url,
     responseType:'json',
-    withCredentials:true
 });
 
 ApiManager.interceptors.request.use(
