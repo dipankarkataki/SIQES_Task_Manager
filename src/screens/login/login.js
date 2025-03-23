@@ -58,7 +58,7 @@ const Login = ({ navigation }) => {
       
       try{
         const res = await LoginApi({
-          'email': email.toLocaleLowerCase(),
+          'email': email,
           'password': password
         });
         console.log('Login Response', res.data);

@@ -1,14 +1,8 @@
-import ApiManager from "../../services/ApiManager";
+import ApiManager from "../../../services/ApiManager";
 
-export default LoginApi = async (data) => {
+export default PendingTaskApi = async () => {
     try {
-        const result = await ApiManager('/login', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            data: data,
-        });
+        const result = await ApiManager('/dashboard/pending-tasks');
         // console.log('API Response: ', result); // Log the response
         return result;
     } catch (error) {
