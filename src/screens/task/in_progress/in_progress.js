@@ -66,7 +66,7 @@ const InProgress = () => {
                       status={task.status}
                       priority={task.priority}
                       due_date={task.due_date}
-                      view_link={'/in-progress/' + task.id}
+                      view_link={task.id}
                     />
                   ))
                 ) : (

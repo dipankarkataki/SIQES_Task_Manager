@@ -66,7 +66,7 @@ const Completed = () => {
                       status={task.status}
                       priority={task.priority}
                       due_date={task.due_date}
-                      view_link={'/completed/' + task.id}
+                      view_link={task.id}
                     />
                   ))
                 ) : (

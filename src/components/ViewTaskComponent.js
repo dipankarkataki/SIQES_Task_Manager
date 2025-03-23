@@ -1,17 +1,14 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { moderateScale, moderateVerticalScale, scale } from 'react-native-size-matters'
-import { useNavigation } from '@react-navigation/native'
+import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { StyleSheet } from "react-native";
+import { moderateScale, moderateVerticalScale, scale } from 'react-native-size-matters';
 
-const TaskCardComponent = ({title, description, status, priority, due_date, view_link }) => {
-    const navigation = useNavigation();
-    const navigateToTask = () => {
-        navigation.navigate("ViewTask", { taskId: view_link });
-    };
+const ViewTaskComponent = ({ category, title, description, priority, due_date, status, remarks }) => {
     return (
         <View style={styles.task_card_container}>
-            <Text numberOfLines={5} style={styles.task_title}>{title}</Text>
-            <Text numberOfLines={5} style={styles.task_description}>{description}</Text>
+            <Text style={styles.task_title}>{title}</Text>
+            <Text style={styles.task_category}>Category: {category}</Text>
+            <Text style={styles.task_description}>{description}</Text>
             <View style={styles.task_body_container}>
                 <View style={styles.task_priority_container}>
                     <Text style={styles.task_priority_title}>Priority: </Text>
@@ -30,22 +27,25 @@ const TaskCardComponent = ({title, description, status, priority, due_date, view
                     {status === 'in_progress' && (<Text style={{ color: "orange", fontFamily: "Roboto-Medium", fontSize: 16, textTransform: 'uppercase' }}>{status}</Text>)}
                     {status === 'completed' && (<Text style={{ color: "green", fontFamily: "Roboto-Medium", fontSize: 16, textTransform: 'uppercase' }}>{status}</Text>)}
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={styles.view_task_button} onPress={navigateToTask}>
-                    <Text style={styles.task_view_link}>View Task</Text>
-                </TouchableOpacity>
+                {/* <TouchableOpacity activeOpacity={0.8} style={styles.view_task_button} onPress={view_link}>
+                                <Text style={styles.task_view_link}>View Task</Text>
+                            </TouchableOpacity> */}
             </View>
+            <Text style={styles.task_remarks}>{remarks}</Text>
         </View>
+
+
     )
 }
 
-export default TaskCardComponent
+export default ViewTaskComponent;
 
 const styles = StyleSheet.create({
     task_card_container: {
         backgroundColor: '#fff',
-        borderRadius: 10,
-        padding: 10,
-        marginVertical: 10,
+        borderRadius: moderateScale(10),
+        padding: moderateScale(10),
+        marginVertical: moderateVerticalScale(10),
         elevation: 5,
         shadowColor: '#000',
         marginHorizontal: moderateScale(10),
@@ -56,6 +56,11 @@ const styles = StyleSheet.create({
         color: 'rgba(28,40,65, 1)',
         marginBottom: moderateVerticalScale(5),
     },
+    task_category: {
+        fontFamily: "Roboto-Regular",
+        fontSize: scale(15),
+        color: 'rgb(105,105,105)',
+    },
     task_description: {
         fontSize: scale(15),
         fontFamily: 'Roboto-Regular',
@@ -64,23 +69,23 @@ const styles = StyleSheet.create({
         paddingRight: moderateScale(10),
         marginVertical: moderateVerticalScale(5),
     },
-    task_body_container:{
+    task_body_container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         marginVertical: moderateVerticalScale(5),
     },
-    task_priority_container:{
+    task_priority_container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
-    task_priority_title:{
+    task_priority_title: {
         fontSize: scale(14),
         fontFamily: 'Roboto-Medium',
         color: 'rgba(28,40,65, 0.8)',
     },
-    task_due_date:{
+    task_due_date: {
         fontSize: scale(14),
         fontFamily: 'Roboto-Medium',
         color: 'rgba(28,40,65, 0.8)',
@@ -123,5 +128,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Medium',
         color: '#fff',
         textTransform: 'uppercase',
+    },
+    task_remarks: {
+        fontSize: scale(15),
+        fontFamily: 'Roboto-Regular',
+        color: 'rgb(105,105,105)',
+        textAlign: 'justify',
+        paddingRight: moderateScale(10),
+        marginVertical: moderateVerticalScale(5),
     }
 });

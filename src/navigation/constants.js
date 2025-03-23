@@ -5,5 +5,6 @@ export default {
     PENDING_TASKS: 'PendingTasks',
     IN_PROGRESS_TASKS: 'InProgressTasks',
     COMPLETED_TASKS: 'CompletedTasks',
-    PROFILE: 'Profile'
+    PROFILE: 'Profile',
+    VIEW_TASK: 'ViewTask'
 }
