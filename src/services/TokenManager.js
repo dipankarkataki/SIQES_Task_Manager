@@ -1,0 +1,55 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const TOKEN_KEY = 'AccessToken';
+
+let cachedToken = null;
+
+const TokenManager = {
+    /**
+     * Retrieves the token.
+     * First checks the in-memory cache; if not found, retrieves from AsyncStorage.
+     * @returns {Promise<string|null>} The token or null if not found.
+     */
+    getToken: async () => {
+        if (cachedToken) {
+            return cachedToken;
+        }
+        try {
+            const token = await AsyncStorage.getItem(TOKEN_KEY);
+            cachedToken = token;
+            return token;
+        } catch (error) {
+            console.error('Error retrieving token from AsyncStorage:', error);
+            return null;
+        }
+    },
+
+    /**
+     * Sets the token in both in-memory cache and AsyncStorage.
+     * @param {string} token - The token to set.
+     * @returns {Promise<void>}
+     */
+    setToken: async (token) => {
+        try {
+            cachedToken = token;
+            await AsyncStorage.setItem(TOKEN_KEY, token);
+        } catch (error) {
+            console.error('Error setting token in AsyncStorage:', error);
+        }
+    },
+
+    /**
+     * Removes the token from both in-memory cache and AsyncStorage.
+     * @returns {Promise<void>}
+     */
+    removeToken: async () => {
+        try {
+            cachedToken = null;
+            await AsyncStorage.removeItem(TOKEN_KEY);
+        } catch (error) {
+            console.error('Error removing token from AsyncStorage:', error);
+        }
+    }
+};
+
+export default TokenManager;
