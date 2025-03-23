@@ -1,14 +1,29 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert } from 'react-native';
 import React from 'react';
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale } from 'react-native-size-matters';
 
 const ViewTaskComponent = ({ category, title, description, priority, due_date, status, remarks }) => {
+    const updateStatus = () => {
+        Alert.alert('Button Clicked')
+    }
+
     return (
         <View style={styles.task_card_container}>
             <Text style={styles.task_title}>{title}</Text>
             <Text style={styles.task_category}>Category: {category}</Text>
-            <Text style={styles.task_description}>{description}</Text>
+            <View style={styles.description_wrapper}> 
+                <Text style={styles.label}>Description: </Text>
+                <Text style={styles.task_description}>{description}</Text>
+            </View>
+            {
+                remarks && (
+                    <View style={styles.remarks_wrapper}>
+                        <Text style={styles.label}>Remarks: </Text>
+                        <Text style={styles.task_remarks}>{remarks}</Text>
+                    </View>
+                )
+            }
             <View style={styles.task_body_container}>
                 <View style={styles.task_priority_container}>
                     <Text style={styles.task_priority_title}>Priority: </Text>
@@ -27,14 +42,12 @@ const ViewTaskComponent = ({ category, title, description, priority, due_date, s
                     {status === 'in_progress' && (<Text style={{ color: "orange", fontFamily: "Roboto-Medium", fontSize: 16, textTransform: 'uppercase' }}>{status}</Text>)}
                     {status === 'completed' && (<Text style={{ color: "green", fontFamily: "Roboto-Medium", fontSize: 16, textTransform: 'uppercase' }}>{status}</Text>)}
                 </View>
-                {/* <TouchableOpacity activeOpacity={0.8} style={styles.view_task_button} onPress={view_link}>
-                                <Text style={styles.task_view_link}>View Task</Text>
-                            </TouchableOpacity> */}
+                <TouchableOpacity activeOpacity={0.8} style={[styles.update_task_button, status === 'completed' ? {backgroundColor: '#acacac'} : null]} disabled={status === 'completed'} onPress={updateStatus}>
+                    <Text style={styles.task_view_link}>Update Status</Text>
+                </TouchableOpacity>
             </View>
-            <Text style={styles.task_remarks}>{remarks}</Text>
+
         </View>
-
-
     )
 }
 
@@ -48,7 +61,7 @@ const styles = StyleSheet.create({
         marginVertical: moderateVerticalScale(10),
         elevation: 5,
         shadowColor: '#000',
-        marginHorizontal: moderateScale(10),
+        marginHorizontal: moderateScale(10)
     },
     task_title: {
         fontSize: scale(18),
@@ -61,12 +74,21 @@ const styles = StyleSheet.create({
         fontSize: scale(15),
         color: 'rgb(105,105,105)',
     },
-    task_description: {
+    label:{
+        marginTop: moderateVerticalScale(10),
         fontSize: scale(15),
+        fontFamily: 'Roboto-Medium',
+        color: 'rgba(28,40,65, 0.8)',
+    },
+    description_wrapper:{
+
+    },
+    task_description: {
+        fontSize: scale(14),
         fontFamily: 'Roboto-Regular',
         color: 'rgb(105,105,105)',
         textAlign: 'justify',
-        paddingRight: moderateScale(10),
+        paddingHorizontal: moderateScale(5),
         marginVertical: moderateVerticalScale(5),
     },
     task_body_container: {
@@ -117,11 +139,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto-Regular',
         color: 'rgba(28,40,65, 0.8)',
     },
-    view_task_button: {
+    update_task_button: {
         backgroundColor: '#2E78FF',
         paddingVertical: moderateVerticalScale(5),
         paddingHorizontal: moderateScale(10),
         borderRadius: moderateScale(5),
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: moderateScale(40)
     },
     task_view_link: {
         fontSize: scale(12),
@@ -129,12 +154,14 @@ const styles = StyleSheet.create({
         color: '#fff',
         textTransform: 'uppercase',
     },
+    remarks_wrapper: {
+    },
     task_remarks: {
-        fontSize: scale(15),
+        fontSize: scale(14),
         fontFamily: 'Roboto-Regular',
         color: 'rgb(105,105,105)',
         textAlign: 'justify',
-        paddingRight: moderateScale(10),
+        paddingHorizontal: moderateScale(5),
         marginVertical: moderateVerticalScale(5),
     }
 });
