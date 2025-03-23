@@ -94,9 +94,11 @@ const AllTasks = () => {
                                 <th>Description</th>
                                 <th>Status</th>
                                 <th>Assigned To</th>
-                                <th>Created By</th>
+                                <th>Due Date</th>
+                                <th>Priority</th>
+                                {/* <th>Created By</th>
                                 <th>Updated By</th>
-                                <th>Deleted By</th>
+                                <th>Deleted By</th> */}
                                 <th>Is Deleted</th>
                                 <th>Action</th>
                             </tr>
@@ -128,9 +130,15 @@ const AllTasks = () => {
                                                 {task.status == 'completed' && (<span className="badge bg-success">Completed</span>)}
                                             </td>
                                             <td>{task.assigned_to?.name || "N/A"}</td>
-                                            <td>{task.created_by?.role || "N/A"}</td>
+                                            <td>{task.due_date}</td>
+                                            <td>
+                                                {task.priority == 'low' && (<span className="badge bg-info">Low</span>)}
+                                                {task.priority == 'medium' && (<span className="badge bg-warning">Medium</span>)}
+                                                {task.priority == 'high' && (<span className="badge bg-danger">High</span>)}
+                                            </td>
+                                            {/* <td>{task.created_by?.role || "N/A"}</td>
                                             <td>{task.updated_by?.role || "N/A"}</td>
-                                            <td>{task.deleted_by?.role || "N/A"}</td>
+                                            <td>{task.deleted_by?.role || "N/A"}</td> */}
                                             <td>{task.deleted_at ? <span className="badge bg-danger">Deleted</span> : <span className="badge bg-success">Active</span>}</td>
                                             <td>
                                                 <button className="btn btn-sm btn-outline-primary mx-2" disabled={isDeleted} onClick={() => editTask(task.id)}>Edit</button>

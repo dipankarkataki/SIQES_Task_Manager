@@ -130,7 +130,7 @@ const CreateTask = () => {
                                 <option value="">Select</option>
                                 <option value="high" className="text-danger">High</option>
                                 <option value="medium" className="text-warning">Medium</option>
-                                <option value="low" className="text-secondary">Low</option>
+                                <option value="low" className="text-info">Low</option>
                             </select>
                         </div>
                         <div className='form-group mb-2'>
