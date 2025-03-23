@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import React from 'react';
+import Routes from './src/navigation/routes';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StyleSheet } from 'react-native';
 
 const App = () => {
   return (
-    <View>
-      <Text>Hello From App.js</Text>
-    </View>
+    <GestureHandlerRootView style={styles.container}>
+      <Routes />
+    </GestureHandlerRootView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+});
 
 export default App
