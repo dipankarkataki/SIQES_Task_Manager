@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
     Route::group(['prefix' => 'task'], function(){
         Route::get('task-by-id/{id}', [TaskController::class, 'getTaskById']);
+        Route::put('update-task', [TaskController::class, 'updateTaskStatus']);
     });
     Route::post('/logout', [LogoutController::class, 'logout']);
 });
