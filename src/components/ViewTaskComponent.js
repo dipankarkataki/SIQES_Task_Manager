@@ -1,11 +1,45 @@
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import React from 'react';
+import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
 import { StyleSheet } from "react-native";
 import { moderateScale, moderateVerticalScale, scale } from 'react-native-size-matters';
+import UpdateTaskStatusApi from '../api/Tasks/UpdateTaskStatus/UpdateTaskStatusApi';
+import { useNavigation } from '@react-navigation/native';
+import constants from '../navigation/constants';
 
-const ViewTaskComponent = ({ category, title, description, priority, due_date, status, remarks }) => {
-    const updateStatus = () => {
-        Alert.alert('Button Clicked')
+const ViewTaskComponent = ({ category, title, description, priority, due_date, status, remarks, task_id }) => {
+    
+    const [loader, setLoader] = useState(false);
+    const navigation = useNavigation();
+
+    const updateStatus = async (status, task_id) => {
+        
+        let new_status = status === 'pending' ? 'in_progress' : 'completed';
+
+        setLoader(true);
+        try{
+            const res = await UpdateTaskStatusApi({new_status, task_id});
+            if(res.data?.success === true){
+                Alert.alert('Task updated successfully', '', [
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            navigation.navigate(constants.DASHBOARD, {
+                                screen: "TopTabsNavigator",
+                                params: { screen: new_status === 'in_progress' ? "In Progress" : "Completed" }
+                            });
+                        },
+                    },
+                ]);
+                
+            }else{
+                Alert.alert('Failed to updated task');
+            }
+        }catch(err){
+            console.log('Failed to update task status: ', err)
+        }finally{
+            setLoader(false);
+        }
+       
     }
 
     return (
@@ -42,8 +76,13 @@ const ViewTaskComponent = ({ category, title, description, priority, due_date, s
                     {status === 'in_progress' && (<Text style={{ color: "orange", fontFamily: "Roboto-Medium", fontSize: 16, textTransform: 'uppercase' }}>{status}</Text>)}
                     {status === 'completed' && (<Text style={{ color: "green", fontFamily: "Roboto-Medium", fontSize: 16, textTransform: 'uppercase' }}>{status}</Text>)}
                 </View>
-                <TouchableOpacity activeOpacity={0.8} style={[styles.update_task_button, status === 'completed' ? {backgroundColor: '#acacac'} : null]} disabled={status === 'completed'} onPress={updateStatus}>
-                    <Text style={styles.task_view_link}>Update Status</Text>
+                <TouchableOpacity activeOpacity={0.8} style={[styles.update_task_button, status === 'completed' ? {backgroundColor: '#acacac'} : null]} disabled={status === 'completed' || loader} onPress={() => updateStatus(status, task_id)}>
+                    <Text style={styles.task_view_link}>{loader ? 'Updating...' : 'Update Status'}</Text>
+                    {
+                        loader && (
+                            <ActivityIndicator size="large" color='#FFF' style={styles.activity_indicator} animating={loader}/>
+                        )
+                    }
                 </TouchableOpacity>
             </View>
 
@@ -140,6 +179,7 @@ const styles = StyleSheet.create({
         color: 'rgba(28,40,65, 0.8)',
     },
     update_task_button: {
+        flexDirection: 'row',
         backgroundColor: '#2E78FF',
         paddingVertical: moderateVerticalScale(5),
         paddingHorizontal: moderateScale(10),

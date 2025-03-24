@@ -43,7 +43,7 @@ const ViewTask = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <ViewTaskComponent category={task?.category?.title} title={task?.title} description={task?.description} 
-      priority={task?.priority} due_date={task?.due_date} status={task?.status} remarks={task?.remarks} />
+      priority={task?.priority} due_date={task?.due_date} status={task?.status} remarks={task?.remarks} task_id={taskId}/>
     </SafeAreaView>
   )
 }
